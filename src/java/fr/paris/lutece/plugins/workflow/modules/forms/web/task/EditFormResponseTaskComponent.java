@@ -87,6 +87,7 @@ public class EditFormResponseTaskComponent extends AbstractFormResponseTaskCompo
     private static final String MARK_MAPPING_LIST = "mapping_list";
     private static final String MARK_MULTIFORM = "multiform";
     private static final String MARK_CODE_LIST = "code_list";
+    private static final String MARK_CODE = "code";
 
     // Parameters
     private static final String PARAMETER_ACTION = "apply";
@@ -306,6 +307,9 @@ public class EditFormResponseTaskComponent extends AbstractFormResponseTaskCompo
         model.put( MARK_MAPPING_LIST, _config.getListConfigValues( ) );
         model.put( MARK_MULTIFORM, _config.isMultiform( ) );
         model.put( MARK_CODE_LIST, _editFormResponseTaskService.selectAllTechnicalCode( isTaskBo( ) ) );
+            // sans cette valeur le selecteur retombe sur le premier code de la liste, et l'ecran affiche les reponses d'un code
+            // en montrant le nom d'un autre. Les deux templates de controleur d'etat la passent deja.
+        model.put( MARK_CODE, _configValue.getCode( ) );
 
         if ( _configValue.getForm( ) != null )
         {
